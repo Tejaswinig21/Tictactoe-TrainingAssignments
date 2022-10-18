@@ -25,7 +25,7 @@ export class GameBoardComponent implements OnInit {
   oinputCount:number=0;
   totalInputCount:number=0;
   imageSource='';
-  @Output() scores=new EventEmitter<{xscore:number,yscore:number}>();
+  @Output() scores=new EventEmitter<{xscore:number,oscore:number}>();
   
   getColor(){
     if(this.playerTurn==true){
@@ -106,13 +106,13 @@ export class GameBoardComponent implements OnInit {
     this.winningSum=this.arr[row1][col1]+this.arr[row2][col2]+this.arr[row3][col3];
     if(this.winningSum==0){
       this.win=1;
-      this.scores.emit({xscore:0,yscore:1});
+      this.scores.emit({xscore:0,oscore:1});
       this.player='Player2';
       this.imageSource='https://img.freepik.com/premium-vector/gamer-mascot-geek-boy-esports-logo-avatar-with-headphones-glasses-cartoon-character_8169-228.jpg'
     }
     else if(this.winningSum==3){
       this.win=1;
-      this.scores.emit({xscore:1,yscore:0});
+      this.scores.emit({xscore:1,oscore:0});
       this.player='Player1';
       this.imageSource='https://img.freepik.com/premium-vector/pro-gamer-avatar-logo_71220-49.jpg?w=2000'
     }

@@ -15,10 +15,10 @@ constructor(private router:Router) { }
   ngOnInit(): void {
   }
   totalxscore:number=0;
-  totalyscore:number=0;
-  addScores(score:{xscore:number,yscore:number}){
+  totaloscore:number=0;
+  addScores(score:{xscore:number,oscore:number}){
     this.totalxscore+=score.xscore;
-    this.totalyscore+=score.yscore;
+    this.totaloscore+=score.oscore;
     this.scores.emit();
   }
   gotoMainPage(){
