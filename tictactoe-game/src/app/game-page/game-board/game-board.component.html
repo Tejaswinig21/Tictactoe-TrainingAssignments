@@ -1,0 +1,65 @@
+ <!-- game grid -->
+
+ <div class="d-flex justify-content-between mt-5 mx-5">
+    <!-- player1 image -->
+    <div>
+        <div class="py-4  px-4 rounded-4" [ngClass]="{'active' : playerTurn==false?true:false,'passive':playerTurn==true?true:false}">
+            <img class="rounded-circle" src="https://img.freepik.com/premium-vector/pro-gamer-avatar-logo_71220-49.jpg?w=2000" alt="" style="height:150px;width:150px">
+            <p class="text-center m-0" style="color: whitesmoke;">Player1</p>
+        </div>
+        <p class="text-center" style="color: whitesmoke;" *ngIf="playerTurn==false?true:false;">It's your turn</p>
+    </div>
+    
+    <!-- game box -->
+    <div>
+        <table>
+            <tr *ngFor="let x of [].constructor(3);let i=index;">
+                <td *ngFor="let y of [].constructor(3);let j=index;">
+                    <input type="text" id="inp" (click)="play(i,j,$event);" [ngClass]="{'boom':arr[i][j]==10,'xColor':arr[i][j]==1,'oColor':arr[i][j]==0}" readonly>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- player2 image -->
+    <div>
+        <div class="py-4 px-4 rounded-4" [ngClass]="{'active' : playerTurn==true?true:false,'passive':playerTurn==false?true:false}">
+            <img class="rounded-circle" src="https://img.freepik.com/premium-vector/gamer-mascot-geek-boy-esports-logo-avatar-with-headphones-glasses-cartoon-character_8169-228.jpg" alt="" style="height:150px;width:150px;">
+            <p class="text-center m-0" style="color: whitesmoke;">Player2</p>
+        </div>
+        <p class="text-center" *ngIf="playerTurn==true?true:false" style="color: white;">It's your turn</p>
+    </div>
+</div>
+<br>
+
+<!-- reset and exit buttons -->
+<div class="text-center">
+    <button class="p-2 bntn resetbtn" data-toggle="tooltip"  data-placement="top" title="reset" (click)="reset()">reset</button>
+    <button class="p-2 bntn exitbtn" data-toggle="tooltip" data-placement="top" title="Exit Game" routerLink="/">exit</button>
+ </div>
+ <br>
+
+ <!-- winner dialog -->
+<div>
+    <dialog id="myModal" style="border: 0px;" #dialogBox>
+        <div *ngIf="winningSum==3 || winningSum==0" style="width: 400px;">
+            <div class="text-center"><img src="https://i.pinimg.com/originals/cf/20/1f/cf201f6b3b42836eb940616f42b3fc6f.gif" alt="" style="height: 100px;width: 50%;object-fit: cover;"></div>
+            <div class="d-flex justify-content-center">
+                <img class="rounded-circle" [src]="imageSource" alt="" style="height:100px;width:100px">
+            </div>
+            <h6 class="text-center">{{player}} won the game</h6>
+        </div>
+        <div *ngIf="winningSum==3 || winningSum==0?false:true;" style="width: 400px;">
+            <p class="text-center" style="font-weight: bold;">Oops!!!</p>
+            <div class="d-flex justify-content-center">
+                <img src="https://i.pinimg.com/originals/2f/85/3d/2f853d0d25410ea49f6e1c4628e63dd9.gif" alt="" style="height: 120px;width: 50%;object-fit: contain;">
+            </div>
+            <div class="text-center">It's a draw match</div>
+        </div>
+        <div class="text-center" style="margin-top: 20px;">
+            <button class="btn btn-primary" (click)="newGame()">Play Again</button>
+            <button class="btn primary exitGame" routerLink="/">Exit Game</button>
+        </div>
+        <br>
+    </dialog>
+</div>
