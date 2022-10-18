@@ -3,11 +3,11 @@
  <div class="d-flex justify-content-between mt-5 mx-5">
     <!-- player1 image -->
     <div>
-        <div class="py-4  px-4 rounded-4" [ngClass]="{'active' : playerTurn==false?true:false,'passive':playerTurn==true?true:false}">
-            <img class="rounded-circle" src="https://img.freepik.com/premium-vector/pro-gamer-avatar-logo_71220-49.jpg?w=2000" alt="" style="height:150px;width:150px">
-            <p class="text-center m-0" style="color: whitesmoke;">Player1</p>
+        <div class="py-4  px-4 rounded-4" [ngClass]="{'active' : playerTurn==false,'passive':playerTurn==true}">
+            <img class="rounded-circle" src="https://img.freepik.com/premium-vector/pro-gamer-avatar-logo_71220-49.jpg?w=2000" alt="" height="150px" width="150px">
+            <p class="text-center m-0 white">Player1</p>
         </div>
-        <p class="text-center" style="color: whitesmoke;" *ngIf="playerTurn==false?true:false;">It's your turn</p>
+        <p class="text-center white" *ngIf="playerTurn==false?true:false;">It's your turn</p>
     </div>
     
     <!-- game box -->
@@ -23,11 +23,11 @@
 
     <!-- player2 image -->
     <div>
-        <div class="py-4 px-4 rounded-4" [ngClass]="{'active' : playerTurn==true?true:false,'passive':playerTurn==false?true:false}">
-            <img class="rounded-circle" src="https://img.freepik.com/premium-vector/gamer-mascot-geek-boy-esports-logo-avatar-with-headphones-glasses-cartoon-character_8169-228.jpg" alt="" style="height:150px;width:150px;">
-            <p class="text-center m-0" style="color: whitesmoke;">Player2</p>
+        <div class="py-4 px-4 rounded-4" [ngClass]="{'active' : playerTurn==true,'passive':playerTurn==false}">
+            <img class="rounded-circle" src="https://img.freepik.com/premium-vector/gamer-mascot-geek-boy-esports-logo-avatar-with-headphones-glasses-cartoon-character_8169-228.jpg" alt="" height="150px" width="150px">
+            <p class="text-center m-0 white">Player2</p>
         </div>
-        <p class="text-center" *ngIf="playerTurn==true?true:false" style="color: white;">It's your turn</p>
+        <p class="text-center white" *ngIf="playerTurn==true?true:false">It's your turn</p>
     </div>
 </div>
 <br>
@@ -56,7 +56,7 @@
             </div>
             <div class="text-center">It's a draw match</div>
         </div>
-        <div class="text-center" style="margin-top: 20px;">
+        <div class="text-center mt-5">
             <button class="btn btn-primary" (click)="newGame()">Play Again</button>
             <button class="btn primary exitGame" routerLink="/">Exit Game</button>
         </div>
