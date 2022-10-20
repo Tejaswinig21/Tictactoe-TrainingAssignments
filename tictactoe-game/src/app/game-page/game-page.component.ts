@@ -10,19 +10,16 @@ import { timeout } from 'rxjs';
 export class GamePageComponent implements OnInit {
 constructor(private router:Router) { }
 
-  @Output() mainPage=new EventEmitter();
-  @Output() scores=new EventEmitter();
-  ngOnInit(): void {
-  }
   totalxscore:number=0;
   totaloscore:number=0;
+  
+  ngOnInit(): void {
+  }
+  
   addScores(score:{xscore:number,oscore:number}){
     this.totalxscore+=score.xscore;
     this.totaloscore+=score.oscore;
-    this.scores.emit();
   }
-  gotoMainPage(){
-    this.mainPage.emit();
-  }
+
   
 }

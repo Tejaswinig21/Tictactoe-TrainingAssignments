@@ -8,19 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
-
-  // @Output() activated=new EventEmitter();
   
   constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
-  // ActivateMainPage(){
-
-  //   this.activated.emit();
-  // }
-  // gotoGamePage(){
-  //   this.router.navigate([`/GamePage`]);
-  // }
 }
