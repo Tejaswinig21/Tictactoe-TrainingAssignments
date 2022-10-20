@@ -16,91 +16,51 @@ export class GameBoardComponent implements OnInit {
   @Output() exitPage=new EventEmitter(); 
   arr:number[][]=[[2,2,2],[2,2,2],[2,2,2]];
   draw:number=0;
-  val='';
   win:number=0;
   player='';
   winningSum:number=10;
   playerTurn:boolean=false;
-  xinputCount:number=0;
-  oinputCount:number=0;
   totalInputCount:number=0;
   imageSource='';
   @Output() scores=new EventEmitter<{xscore:number,oscore:number}>();
   
-  getColor(){
-    if(this.playerTurn==true){
-      return 'red';
-    }
-    else{
-      return 'yellow'
-    }
-  }
 
-  play(r:number,c:number,event:Event){
-    if(this.playerTurn==false && (event.target as HTMLInputElement).value=='' ){
+  play(row:number,col:number,event:Event){
+    var inputValue=(event.target as HTMLInputElement).value;
+    if(this.playerTurn==false && inputValue=='' ){
       (event.target as HTMLInputElement).value='X';
       this.playerTurn=true;
-      this.arr[r][c]=1;
-      this.xinputCount+=1;
+      this.arr[row][col]=1;
     }
-    else if(this.playerTurn==true && (event.target as HTMLInputElement).value==''){
+    else if(this.playerTurn==true && inputValue==''){
       (event.target as HTMLInputElement).value='O';
       this.playerTurn=false;
-      this.arr[r][c]=0;
-      this.oinputCount+=1;
+      this.arr[row][col]=0;
     }
     this.totalInputCount+=1;
-    if(this.xinputCount>2 || this.oinputCount>2){
+    if(this.totalInputCount>4){
       this.check();
     }
   }
   
   check(){
-    if (this.arr[0][0] != 2 && this.arr[0][1] != 2 && this.arr[0][2] != 2) {
-      if(this.checkWinner(0,0,0,1,0,2)){
+
+    for(let i=0;i<3;i++){
+      if((this.arr[i][0]!=2 && this.arr[i][1]!=2 && this.arr[i][2]!=2 && this.checkWinner(i,0,i,1,i,2)) || (this.arr[0][i]!=2 && this.arr[1][i]!=2 && this.arr[2][i]!=2 && this.checkWinner(0,i,1,i,2,i))){
         return;
       }
     }
-    if (this.arr[1][0] != 2 && this.arr[1][1] != 2 && this.arr[1][2] != 2) {
-      if(this.checkWinner(1,0,1,1,1,2)){
-        return;
-      }
-      }
-    if (this.arr[2][0] != 2 && this.arr[2][1] != 2 && this.arr[2][2] != 2) {
-      if(this.checkWinner(2,0,2,1,2,2)){
-        return;
-      }
+    if (this.arr[0][0] != 2 && this.arr[1][1] != 2 && this.arr[2][2] != 2 && this.checkWinner(0,0,1,1,2,2)) {
+      return;
     }
-    if (this.arr[0][0] != 2 && this.arr[1][0] != 2 && this.arr[2][0] != 2) {
-      if(this.checkWinner(0,0,1,0,2,0)){
-        return;
-      }
-    }
-    if (this.arr[0][1] != 2 && this.arr[1][1] != 2 && this.arr[2][1] != 2) {
-      if(this.checkWinner(0,1,1,1,2,1)){
-        return;
-      }    
-    }
-    if (this.arr[0][2] != 2 && this.arr[1][2] != 2 && this.arr[2][2] != 2) {
-      if(this.checkWinner(0,2,1,2,2,2)){
-        return;
-      }
-    }
-    if (this.arr[0][0] != 2 && this.arr[1][1] != 2 && this.arr[2][2] != 2) {
-      if(this.checkWinner(0,0,1,1,2,2)){
-        return;
-      }
-    }
-    if (this.arr[0][2] != 2 && this.arr[1][1] != 2 && this.arr[2][0] != 2) {
-      if(this.checkWinner(0,2,1,1,2,0)){
-        return;
-      }
+    if (this.arr[0][2] != 2 && this.arr[1][1] != 2 && this.arr[2][0] != 2 && this.checkWinner(0,2,1,1,2,0)) {
+      return;
     }
     if (this.totalInputCount==9 && this.win!=1) {
       this.openModel();
       this.draw=1;
     }
-      }
+  }
 
   checkWinner(row1:number,col1:number,row2:number,col2:number,row3:number,col3:number){
     this.winningSum=this.arr[row1][col1]+this.arr[row2][col2]+this.arr[row3][col3];
@@ -132,6 +92,15 @@ export class GameBoardComponent implements OnInit {
     }, 1000);
   }
 
+  getColor(){
+    if(this.playerTurn==true){
+      return 'red';
+    }
+    else{
+      return 'yellow'
+    }
+  }
+
   newGame(){
     (document.getElementById("myModal") as HTMLDialogElement).close();
     this.reset();
@@ -143,8 +112,6 @@ export class GameBoardComponent implements OnInit {
       this.arr=[[2,2,2],[2,2,2],[2,2,2]];
       this.win=0;
       this.draw=0;
-      this.xinputCount=0;
-      this.oinputCount=0;
       this.totalInputCount=0;
     }
   }
